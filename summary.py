@@ -1,19 +1,33 @@
+
 import sys
 from collections import Counter
 
-filename = sys.argv [1]
-num=int(sys.argv[2])
-with open (filename) as f:
-    lines = f.readlines ()
- 
-print ("Total lines:", len (lines))
+# Get the file name
+filename = sys.argv[1]
 
-counts = Counter ()
+# Get the word from the command-line argument
+word = sys.argv[2]
+
+# Open the file and read all lines
+with open(filename) as f:
+    lines = f.readlines()
+
+# Print the total number of lines
+print("Total lines:", len(lines))
+
+# Create a Counter
+counts = Counter()
+
+# Check each line
 for line in lines:
-    fields = line.split ()
-    if len (fields) > num:
-        key = fields [num]
-        counts [key] += 1
-print ("Top 5:")
-for item, n in counts.most_common (5):
-    print(item,n)
+    fields = line.split()
+
+    # Count the word if it appears in the line
+    for field in fields:
+        if field == word:
+            counts[field] += 1
+
+# Print the result
+print("Top 5:")
+for item, n in counts.most_common(5):
+    print(item, n)
